@@ -17,7 +17,7 @@ class _ActivityPageState extends State<ActivityPage> with AutomaticKeepAliveClie
     super.build(context);
     return const Column(
       children: [
-        Text('Activity')
+        Text('Activity - ???')
       ],
     );
   }
