@@ -17,7 +17,7 @@ class _ShopPageState extends State<ShopPage> with AutomaticKeepAliveClientMixin 
     super.build(context);
     return const Column(
       children: [
-        Text('Shop')
+        Text('Shop - hwanza')
       ],
     );
   }
