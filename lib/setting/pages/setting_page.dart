@@ -17,7 +17,7 @@ class _SettingPageState extends State<SettingPage> with AutomaticKeepAliveClient
     super.build(context);
     return const Column(
       children: [
-        Text('Setting - friox')
+        Text('Setting - frioxs')
       ],
     );
   }
