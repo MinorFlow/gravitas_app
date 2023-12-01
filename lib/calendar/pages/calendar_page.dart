@@ -14,11 +14,11 @@ class _CalendarPageState extends State<CalendarPage>
   @override
   bool get wantKeepAlive => true;
 
+  List<bool> _selections1 = List.generate(3, (index) => false);
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
-    List<bool> _selections1 = List.generate(3, (index) => false);
 
     return Column(
       children: [
