@@ -10,10 +10,15 @@ class CalendarPage extends StatefulWidget {
 
 class _CalendarPageState extends State<CalendarPage>
     with AutomaticKeepAliveClientMixin {
+  DateTime selectedDay = DateTime(
+    DateTime.now().year,
+    DateTime.now().month,
+    DateTime.now().day,
+  );
+
   DateTime today = DateTime.now();
   @override
   bool get wantKeepAlive => true;
-
   List<bool> _selections1 = List.generate(3, (index) => false);
 
   @override
@@ -22,13 +27,25 @@ class _CalendarPageState extends State<CalendarPage>
 
     return Column(
       children: [
-        Container(
+        Container( // 캘린더
           child: TableCalendar(
             locale: 'ko-KR',
             focusedDay: today,
             firstDay: DateTime.utc(2021, 01, 01),
             lastDay: DateTime.utc(2030, 12, 31),
-            daysOfWeekHeight: 30, // 날짜 설정
+            daysOfWeekHeight: 30, // 날짜 설정 
+        onDaySelected: (DateTime selectedDay, DateTime focusedDay) {
+          // 선택된 날짜의 상태를 갱신합니다.	
+          setState((){
+            this.selectedDay = selectedDay;
+          });
+        },
+        selectedDayPredicate: (DateTime day) {
+          // selectedDay 와 동일한 날짜의 모양을 바꿔줍니다.	
+          return isSameDay(selectedDay, day);
+        },
+
+
             headerStyle: HeaderStyle(
               formatButtonVisible: false,
               titleCentered: true,
@@ -37,7 +54,7 @@ class _CalendarPageState extends State<CalendarPage>
               titleTextStyle: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w600,
-                color: Colors.green,
+                color: Colors.black,
               ),
             ), //헤더 디자인
             calendarStyle: CalendarStyle(
@@ -46,44 +63,56 @@ class _CalendarPageState extends State<CalendarPage>
               defaultTextStyle: TextStyle(
                   //평일 날짜 디자인
                   color: Colors.black,
-                  fontSize: 18,
+                  fontSize: 15,
                   fontWeight: FontWeight.w500),
               weekendTextStyle: TextStyle(
                   //주말 날짜 디자인
                   color: Colors.red,
-                  fontSize: 18,
+                  fontSize: 15,
                   fontWeight: FontWeight.w500),
               todayDecoration: BoxDecoration(
                   // 오늘 날짜 디자인
-                  color: Colors.transparent,
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.blue, width: 3)),
+                  color: Colors.black,
+                  shape: BoxShape.rectangle,
+                  ),
               todayTextStyle: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w900,
-                  color: Colors.blue),
+                  color: Colors.white,),
+
+
+              
               tableBorder: const TableBorder(
                 top: BorderSide(color: Colors.black),
                 horizontalInside: BorderSide(color: Colors.black),
                 verticalInside: BorderSide(color: Colors.black),
               ),
               rowDecoration: const BoxDecoration(
-                color: Colors.white30,
+                color: Colors.white,
               ),
-              selectedDecoration: const BoxDecoration(
-                color: Colors.brown,
+              selectedDecoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey,
+                  style: BorderStyle.solid,
+                  width: 2,
+                )
               ),
+              selectedTextStyle: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: Colors.lightBlue,
+              )
             ),
           ),
         ), // 캘린더
-        Container(
+        Container( //버튼
           child: ToggleButtons(
             renderBorder: true,
             borderRadius: BorderRadius.circular(10),
             borderWidth: 10,
             borderColor: Colors.white,
-            selectedColor: Colors.blue,
-            fillColor: Colors.blue,
+            selectedColor: Colors.white,
+            fillColor: Colors.black,
             color: Colors.black12,
             children: [
               const Padding(
@@ -107,7 +136,21 @@ class _CalendarPageState extends State<CalendarPage>
             ],
             onPressed: (int index) {
               setState(() {
-                _selections1[index] = !_selections1[index];
+                if(index == 0){
+                  _selections1[0] = true;
+                  _selections1[1] = false;
+                  _selections1[2] = false;
+                }
+                else if(index == 1){
+                  _selections1[0] = false;
+                  _selections1[1] = true;
+                  _selections1[2] = false;
+                }
+                else if(index == 2){
+                  _selections1[0] = false;
+                  _selections1[1] = false;
+                  _selections1[2] = true;
+                }
               });
             },
             isSelected: _selections1,
