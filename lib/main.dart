@@ -4,8 +4,10 @@ import 'package:gravitas_app/calendar/pages/calendar_page.dart';
 import 'package:gravitas_app/activity/pages/activity_page.dart';
 import 'package:gravitas_app/shop/pages/shop_page.dart';
 import 'package:gravitas_app/setting/pages/setting_page.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() {
+void main() async {
+  await initializeDateFormatting();
   runApp(const GravitasApp());
 }
 
