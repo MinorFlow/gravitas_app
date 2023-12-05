@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -8,19 +10,34 @@ class CalendarPage extends StatefulWidget {
   State<CalendarPage> createState() => _CalendarPageState();
 }
 
+class Event{
+  String title;
+
+  Event(this.title);
+}
+
 class _CalendarPageState extends State<CalendarPage>
     with AutomaticKeepAliveClientMixin {
   DateTime selectedDay = DateTime(
     DateTime.now().year,
     DateTime.now().month,
-    DateTime.now().day,
+    DateTime.now().day+1,
   );
 
   DateTime today = DateTime.now();
   @override
   bool get wantKeepAlive => true;
-  List<bool> _selections1 = List.generate(3, (index) => false);
+  List<bool> _selections1 = List.generate(3, (index) => false); //버튼 눌렀는지 여부 저장
+  
+  Map<DateTime, dynamic> events = { //저장된 일정을 받는 배열
+    DateTime.utc(2023,12,13) : [ Event('일정1'), Event('일정2') ],
+    DateTime.utc(2023,12,25) : [ Event('일정3') ],
+  };
+  
 
+  List<Event> _getEventsForDay(DateTime day) {
+    return events[day] ?? [];
+  }
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -29,6 +46,7 @@ class _CalendarPageState extends State<CalendarPage>
       children: [
         Container( // 캘린더
           child: TableCalendar(
+            eventLoader: _getEventsForDay,
             locale: 'ko-KR',
             focusedDay: today,
             firstDay: DateTime.utc(2021, 01, 01),
@@ -44,8 +62,6 @@ class _CalendarPageState extends State<CalendarPage>
           // selectedDay 와 동일한 날짜의 모양을 바꿔줍니다.	
           return isSameDay(selectedDay, day);
         },
-
-
             headerStyle: HeaderStyle(
               formatButtonVisible: false,
               titleCentered: true,
@@ -57,8 +73,7 @@ class _CalendarPageState extends State<CalendarPage>
                 color: Colors.black,
               ),
             ), //헤더 디자인
-            calendarStyle: CalendarStyle(
-              // 켈린더 내부 디자인
+            calendarStyle: CalendarStyle(// 켈린더 내부 디자인
               outsideDaysVisible: false, //이전, 이후 달 보이지 않기
               defaultTextStyle: TextStyle(
                   //평일 날짜 디자인
@@ -78,10 +93,7 @@ class _CalendarPageState extends State<CalendarPage>
               todayTextStyle: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w900,
-                  color: Colors.white,),
-
-
-              
+                  color: Colors.white,),              
               tableBorder: const TableBorder(
                 top: BorderSide(color: Colors.black),
                 horizontalInside: BorderSide(color: Colors.black),
