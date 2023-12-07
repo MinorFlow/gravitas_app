@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gravitas_app/activity/widgets/activity_tuple.dart';
 import 'package:gravitas_app/activity/widgets/activity_dropdown.dart';
@@ -99,9 +100,10 @@ class _ActivityPageState extends State<ActivityPage>
                 ],
                 dropdownColor: Colors.black,
               ),
+              const SizedBox(width: 12),
               const SizedBox(
                 height: 24,
-                width: 240,
+                width: 200,
                 child: TextField(
                   textAlignVertical: TextAlignVertical.bottom,
                   cursorHeight: 12,
@@ -115,6 +117,30 @@ class _ActivityPageState extends State<ActivityPage>
                       ),
                     ),
                     hintText: 'search',
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              SizedBox(
+                width: 60,
+                height: 24,
+                child: TextButton(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    minimumSize: const Size(60, 24),
+                    padding: EdgeInsets.zero,
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.black,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(0.0)),
+                    ),
+                  ),
+                  child: const Text(
+                    '검색',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

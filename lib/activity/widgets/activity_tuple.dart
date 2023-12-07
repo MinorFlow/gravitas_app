@@ -11,8 +11,8 @@ class ActivityTuple extends StatefulWidget {
 
 class _ActivityTupleState extends State<ActivityTuple> {
   String title = "";
-  String planet = '블루 아카이브!';
-  String content = "바니걸 센세 ㅇㄷ";
+  String planet = '';
+  String content = "변수로 전달";
   int year = 0;
   int month = 0;
   int dat = 0;
@@ -46,7 +46,7 @@ class _ActivityTupleState extends State<ActivityTuple> {
                   width: 24,
                   height: 24,
                   clipBehavior: Clip.antiAlias,
-                  decoration: BoxDecoration(),
+                  decoration: const BoxDecoration(),
                   child: const Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -65,7 +65,7 @@ class _ActivityTupleState extends State<ActivityTuple> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    '바니걸 코스프레하고 산책중인 센세',
+                    '내용내용내용내용',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -120,7 +120,7 @@ class _ActivityTupleState extends State<ActivityTuple> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '바니걸 센세 ㅇㄷ?',
+                    '댓글댓글댓글',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       color: Colors.white,

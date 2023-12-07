@@ -37,14 +37,18 @@ class _Widget090State extends State<Widget090> {
           items: const [
             DropdownMenuItem<String>(
               value: 'One',
-              child: Text('블루아카이브'),
+              child: Text('전체'),
             ),
             DropdownMenuItem<String>(
               value: 'Two',
-              child: Text('인디게임'),
+              child: Text('블루아카이브'),
             ),
             DropdownMenuItem<String>(
               value: 'Three',
+              child: Text('인디게임'),
+            ),
+            DropdownMenuItem<String>(
+              value: 'Four',
               child: Text('번지점프'),
             ),
           ],
